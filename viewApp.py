@@ -3,29 +3,33 @@ import pandas as pd
 import datetime
 import os
 
-# Get today's date
-today = datetime.date.today()
-yesterday = today - datetime.timedelta(days=1)
-# Create the filename with today's date
-today_filename = f"car_data_{today}.csv"
-yesterday_filename = f"car_data_{yesterday}.csv"
-filename_to_use = today_filename
-# Check if today's file exists
-if not os.path.exists(today_filename):
-    if os.path.exists(yesterday_filename):
-        filename_to_use = yesterday_filename
-        print("Using yesterdays file.")
-    else:
-        # Yesterday's file also doesn't exist
-        print(f"Yesterday's file not found: {yesterday_filename}")
-        print("No file available.")
+def get_file_name():
+    # Get today's date
+    today = datetime.date.today()
+    yesterday = today - datetime.timedelta(days=1)
+    # Create the filename with today's date
+    today_filename = f"car_data_{today}.csv"
+    yesterday_filename = f"car_data_{yesterday}.csv"
+    filename_to_use = today_filename
+    # Check if today's file exists
+    if not os.path.exists(today_filename):
+        if os.path.exists(yesterday_filename):
+            filename_to_use = yesterday_filename
+            print("Using yesterdays file.")
+        else:
+            # Yesterday's file also doesn't exist
+            print(f"Yesterday's file not found: {yesterday_filename}")
+            print("No file available.")
+    return filename_to_use
 
 app = Flask(__name__)
 
 @app.route('/')
 def display_table():
     # Read the CSV file
-    data = pd.read_csv(filename_to_use)
+    file = get_file_name()
+    print(f"Reading file: {file}")
+    data = pd.read_csv(file)
     
     # Filter rows based on the "Registration Status" column
     #filtered_data = data[data['Registration Status'] == 'yes']
