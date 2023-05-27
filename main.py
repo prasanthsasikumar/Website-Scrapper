@@ -6,9 +6,14 @@ from ScrapeVehiclePage import scrape_vehicle_page
 from CSVSaver import CarDataWriter
 from PageLengthFinder import count_number_of_pages
 import json
+import datetime
 
-# Create an instance of CarDataWriter
-writer = CarDataWriter('car_data.csv')
+# Get today's date
+today = datetime.date.today()
+# Create the filename with today's date
+filename = f"car_data_{today}.csv"
+# Create an instance of CarDataWriter with the filename
+writer = CarDataWriter(filename)
 writer.initialize()
 
 url = "https://manheim.co.nz/damaged-vehicles/search?PageNumber=1&RecordsPerPage={}&searchType=Z&page={}"
