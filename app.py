@@ -13,7 +13,7 @@ stop_flag = False
 def run_main():
     global output, stop_flag
     # Run the main.py script
-    process = Popen(["python", "main.py"], stdout=PIPE)
+    process = Popen(["python3", "main.py"], stdout=PIPE)
     while True:
         if stop_flag:
             print(stop_flag)
