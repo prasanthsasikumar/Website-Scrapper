@@ -4,6 +4,8 @@ The Website Scrapper tool is a tool designed to help you search for registered c
 
 Here is the link to the tool - http://findcars.prasanthsasikumar.com/
 
+![Screenshot](https://github.com/prasanthsasikumar/Website-Scrapper/blob/main/Screenshot.png?raw=true)
+
 ## Features
 
 - The Website Scrapper tool extracts data from websites that list registered cars and stores it in a CSV file.
