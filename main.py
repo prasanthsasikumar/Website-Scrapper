@@ -102,12 +102,12 @@ while current_page <= number_of_pages:
             json_data = scrape_vehicle_page(href)
             
             # Display the results
-            print("Vehicle:", vehicle)
-            print("Href:", href)
-            print("Price:", price)
-            print("JSON Data:")
-            print(json_data)
-            print("-------------------------")
+            # print("Vehicle:", vehicle)
+            # print("Href:", href)
+            # print("Price:", price)
+            # print("JSON Data:")
+            # print(json_data)
+            # print("-------------------------")
             car_data = {
                 'Manufacturer': return_JSON_values(json_data, "Make"),
                 'Model': return_JSON_values(json_data, "Model"),
@@ -121,6 +121,12 @@ while current_page <= number_of_pages:
                 'Fuel Type': return_JSON_values(json_data, "Fuel Type"),
                 'Link': href,
             }
+            # Get the values and convert them to strings, replacing commas with colons
+            values = [str(value).replace(',', ':') for key, value in car_data.items() if key != 'Damage description']
+            # Join the values with commas
+            csv_line = ', '.join(values)
+            print(csv_line)
+
             writer.save_entry(car_data, ((current_page-1)*numberOfEntries)+current_entry)
             current_entry += 1
 
